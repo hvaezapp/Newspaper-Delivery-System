@@ -5,7 +5,7 @@
 <br>
 سمت فرانت : html css js bootstrap
 <br>
-معمار ی: Mvc
+معماری: Mvc
 <br>
  دیتابیس :   sql server
 </h1>
