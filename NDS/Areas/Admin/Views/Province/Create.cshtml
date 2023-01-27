@@ -1,0 +1,46 @@
+﻿@model Province
+
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-@ViewBag.type">
+        <span class="close" data-dismiss="alert">&times;</span>
+        @ViewBag.message
+    </div>
+
+
+}
+
+
+
+<div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
+    <div class="col-md-10 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">
+
+        <form asp-controller="Province" asp-action="Create" method="post" enctype="multipart/form-data">
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" placeholder="Enter Title ... " />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Back</a>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>
+

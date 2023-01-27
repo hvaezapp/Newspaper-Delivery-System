@@ -1,0 +1,87 @@
+﻿@model Transaction
+
+@using NDS.Utility
+
+
+@{
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Transaction Details For "@Model.Title"</h4>
+</div>
+
+
+<div class="modal-body form-horizontal" style="padding:24px;">
+
+
+
+    <div class="form-group">
+
+        <label asp-for="Description" class="control-label"></label>
+
+        <p>
+            @Model.Description
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="Price" class="control-label"></label>
+
+        <p>
+            @Model.Price.ToPrice()
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+
+
+    <div class="form-group">
+
+        <label asp-for="Type" class="control-label"></label>
+
+
+        @if (Model.Type == TransactionType.Payment.ToInt())
+        {
+
+            <p>
+                Payment
+            </p>
+        }
+        else if (Model.Type == TransactionType.Received.ToInt())
+        {
+            <p>
+                Received
+            </p>
+        }
+
+    </div>
+
+
+
+
+</div>
+
+
+<div class="modal-footer" style="text-align:left;">
+
+    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+
+</div>
+
+
+
+
+

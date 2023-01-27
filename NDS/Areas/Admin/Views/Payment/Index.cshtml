@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Payment>
+
+@using NDS.Utility
+
+
+
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-@TempData["type"]">
+        <span class="close" data-dismiss="alert">&times;</span>
+
+        @TempData["message"]
+
+    </div>
+}
+
+
+<h3>
+    Payments
+</h3>
+
+
+<div class="row center-block box box-success" style="box-shadow:2px 2px 7px 3px gray;">
+
+    <div class="panel panel-primary col-md-8 col-md-offset-2" style="margin-top:25px; margin-bottom:25px;">
+
+        <div class="panel-body">
+            <div>
+                <a class="btn btn-primary" asp-controller="Payment" asp-action="Create">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    New
+                </a>
+            </div>
+        </div>
+
+        <hr style="height:1px; background-color:gray;" />
+
+        @if (Model.Any())
+        {
+            <table class="table table-responsive text-center">
+
+                <thead>
+                    <tr style="font-size:15px; font-weight:600;">
+                        <td>@Html.DisplayNameFor(model => model.FkCustomerId)</td>
+                        <td>@Html.DisplayNameFor(model => model.Price)</td>
+                        <td>@Html.DisplayNameFor(model => model.FkOrderId)</td>
+                        <td>@Html.DisplayNameFor(model => model.CreateDate)</td>
+
+                        <td>Operation</td>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.Tbl_Customer.FirstName @item.Tbl_Customer.LastName</td>
+                            <td>@item.Price</td>
+                            <td>@item.Tbl_Order.Code</td>
+                            <td>@item.CreateDate</td>
+
+
+
+
+                            <td>
+
+
+                                <a class="btn btn-sm  btn-info" asp-controller="Payment" asp-action="Details"
+                                   asp-route-id="@item.Id" data-toggle="modal" data-target="#modal">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                </a>
+
+
+
+                                <a class="btn btn-sm btn-primary" asp-controller="Payment" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+
+
+                                <a class="btn btn-sm  btn-danger" asp-controller="Payment" asp-action="Delete"
+                                   asp-route-id="@item.Id" data-toggle="modal" data-target="#modal">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </a>
+
+
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+
+
+            </table>
+
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <p>
+                    Empty
+                </p>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section PanelScripts{
+    <script src="~/js/modal-js/modal.js"></script>
+}
+
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal", Size = ModalSize.Medium })
+

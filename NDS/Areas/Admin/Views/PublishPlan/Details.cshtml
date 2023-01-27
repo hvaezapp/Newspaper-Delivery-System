@@ -1,0 +1,154 @@
+﻿@model PublishPlan
+
+@using NDS.Utility
+
+
+@{
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Publish Plan</h4>
+</div>
+
+
+<div class="modal-body form-horizontal" style="padding:24px;">
+
+    <div class="form-group">
+
+        <label asp-for="Description" class="control-label"></label>
+
+        <p>
+            @Model.Description
+        </p>
+
+    </div>
+
+    <hr />
+
+
+    <div class="form-group">
+
+        <label asp-for="FkProductId" class="control-label"></label>
+
+        <p>
+            @Model.Tbl_Product.Title
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="FkCustomerId" class="control-label"></label>
+
+        <p>
+            @Model.Tbl_Customer.FirstName @Model.Tbl_Customer.LastName
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="FkStaffId" class="control-label"></label>
+
+        <p>
+            @Model.Tbl_Staff.FirstName @Model.Tbl_Staff.LastName
+        </p>
+
+    </div>
+
+    <hr />
+
+
+    <div class="form-group">
+
+        <label asp-for="Quantity" class="control-label"></label>
+
+        <p>
+            @Model.Quantity
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="DeliveryDateTime" class="control-label"></label>
+
+        <p>
+            @Model.DeliveryDateTime
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="CreateDate" class="control-label"></label>
+
+        <p>
+            @Model.CreateDate
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="Status" class="control-label"></label>
+
+        <p>
+
+
+            @if (Model.Status == PublishPlanStatus.Delivered.ToInt())
+            {
+                <text>Delivered</text>
+            }
+            else if (Model.Status == PublishPlanStatus.Delivering.ToInt())
+            {
+                <text>Delivering</text>
+            }
+            else
+            {
+                <text>NotDelivered</text>
+            }
+        </p>
+
+
+    </div>
+
+
+
+</div>
+
+
+<div class="modal-footer" style="text-align:left;">
+
+    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+
+
+</div>
+
+
+
+
+

@@ -1,0 +1,124 @@
+﻿@model NDS.Models.ViewModels.ProductViewModel
+
+@using NDS.Utility
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-@ViewBag.type">
+        <span class="close" data-dismiss="alert">&times;</span>
+        @ViewBag.message
+    </div>
+
+
+}
+
+
+<div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
+
+
+    <div class="col-md-10 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">
+
+        <form asp-controller="Product" asp-action="Create" method="post">
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="product.Title" class="control-label"></label>
+                <input asp-for="product.Title" class="form-control" placeholder="Enter Title" />
+                <span asp-validation-for="product.Title" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="product.Description" class="control-label"></label>
+                <input asp-for="product.Description" class="form-control" placeholder="Enter Description" />
+                <span asp-validation-for="product.Description" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="product.ProductType" class="control-label"></label>
+
+                <select asp-for="product.ProductType" class="form-control circleInput">
+
+                    <option value="" class="text-bold">Select ProductType</option>
+
+                    <option value="@ProductType.NewsPaper.ToInt()">NewsPaper</option>
+                    <option value="@ProductType.Magazine.ToInt()">Magazine</option>
+
+
+                </select>
+
+                <span asp-validation-for="product.ProductType" class="text-danger"></span>
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label asp-for="product.FkSupplierId" class="control-label"></label>
+                <select asp-for="product.FkSupplierId" asp-items="@(new SelectList(Model.suppliers,"Id","Title"))" class="form-control circleInput">
+
+                    <optgroup label="Select Supplier">Select Supplier</optgroup>
+
+                </select>
+
+                <span asp-validation-for="product.FkSupplierId" class="text-danger"></span>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label asp-for="product.Quantity" class="control-label"></label>
+                <input min="1" asp-for="product.Quantity" class="form-control" placeholder="Enter Quantity" />
+                <span asp-validation-for="product.Quantity" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label asp-for="product.Price" class="control-label"></label>
+                <input asp-for="product.Price" class="form-control" placeholder="Enter Price" />
+                <span asp-validation-for="product.Price" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label asp-for="product.DeliverDateTime" class="control-label"></label>
+                <input asp-for="product.DeliverDateTime" class="form-control" />
+                <span asp-validation-for="product.DeliverDateTime" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Back</a>
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+@section PanelScripts{
+
+  
+
+}

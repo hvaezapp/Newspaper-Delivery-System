@@ -1,0 +1,28 @@
+﻿@*@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+
+@inject UserManager<NDS.Models.Domain.ApplicationUsers> _userManager
+@inject IHttpContextAccessor _hc
+
+
+@{ 
+  
+    var user = await _userManager.GetUserAsync(_hc.HttpContext.User);
+}*@
+
+<div id="login" style="box-shadow:3px 3px 3px gray;margin-top:20px">
+
+  
+    <div class="text-center"> Dear User  @*@user.FirstName @user.LastName*@ Welcome !!</div>
+
+    <hr style="height:1px; background-color:gray;" />
+
+    <div style="margin-top: 30px; margin-bottom:15px;text-align:center">
+        <a href="/AdminPanel/Home/Index" class="btn btn-primary">Admin Panel</a>
+
+        <a href="/AdminPanel/Account/LogOut" class="btn btn-danger">LogOut</a>
+    </div>
+
+</div>
+
+

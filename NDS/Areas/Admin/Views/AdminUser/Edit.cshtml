@@ -1,0 +1,228 @@
+﻿@model AdminUser
+
+@using NDS.Utility
+
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-@ViewBag.type">
+        <span class="close" data-dismiss="alert">&times;</span>
+        @ViewBag.message
+    </div>
+
+
+}
+
+
+
+<div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
+
+    <div class="col-md-6 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">
+
+        <form asp-area="Admin" asp-controller="AdminUser" asp-action="Edit" method="post">
+
+            <input type="hidden" id="imagename" name="imagename" />
+
+            <input type="hidden" asp-for="ImageUrl" />
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreateDate" />
+            <input type="hidden" asp-for="IsDeleted" />
+            <input type="hidden" asp-for="UserName" />
+            <input type="hidden" asp-for="Password" />
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter FirstName " />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Enter LastName " />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" placeholder="Enter Phone " />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+
+                <select asp-for="Gender" class="form-control circleInput">
+
+                    <option value="" class="text-bold">Select Gender</option>
+                    <option value="@Gender.Male.ToInt()">Male</option>
+                    <option value="@Gender.FeMale.ToInt()">Female</option>
+                    <option value="@Gender.Other.ToInt()">Other</option>
+
+                </select>
+
+                <span asp-validation-for="Gender" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="Enter Email " />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+
+
+
+
+            @*<div class="form-group">
+            <label asp-for="UserName" class="control-label"></label>
+            <input asp-for="UserName" class="form-control" placeholder="Enter UserName " />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" placeholder="Enter Password " />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>*@
+
+
+
+
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <div class="form-horizontal">
+                    <input asp-for="ImageUrl" type="file" id="files" name="files" />
+                    <input type="button" onclick="UploadImage('@Url.Action("UploadFile","AdminUser", new { area = "Admin"})' , '\\upload\\user\\normalimage\\')" id="btnupload" class="btn btn-info" value="Upload And Show Image" />
+                </div>
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Back</a>
+            </div>
+
+
+
+
+        </form>
+
+
+    </div>
+
+
+    <div class="col-md-4" style="margin-top:25px; margin-bottom:25px;">
+
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="box box-widget widget-user">
+                <div class="widget-user-header bg-light-blue-active text-center">
+                    <h3 class="widget-user-username">User Image</h3>
+                </div>
+            </div>
+
+            @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+            {
+
+
+                <div class="form-group">
+                    <img id="imgContain" class="img-bordered col-md-12 col-xs-12 col-sm-12"
+                         src="~/upload/user/normalimage/@Model.ImageUrl" alt="@Model.FirstName @Model.LastName"
+                         style="height:200px;" />
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <img id="imgContain" class="img-bordered col-md-12 col-xs-12 col-sm-12"
+                         src="~/upload/user/normalimage/defaultuserImage.png" alt="No Images"
+                         style="height: 200px;" />
+                </div>
+            }
+
+            <div id="divmessage" class="text-center hidden" style="color:green;">
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section PanelScripts{
+
+    <script>
+        var UploadImage = function (url, path) {
+
+            var data = new FormData;
+            var file = $("#files").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('files', files[i]);
+            }
+
+            $.ajax({
+                type: "post",
+                url: url,
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done(function (result) {
+
+                if (result.status == "success") {
+
+
+                    $("#imgContain").attr('src', path + result.imagename);
+
+                    $("#divmessage").removeClass('hidden');
+
+                    $("#divmessage").text(result.message);
+
+                    $("#imagename").val(result.imagename);
+
+                }
+            }).fail(function (result) {
+                if (result.status != "success") {
+                    $("#divmessage").removeClass('hidden');
+                    $("#divmessage").text("Error In Upload Image");
+
+                }
+            });
+
+        }
+
+    </script>
+
+}
+

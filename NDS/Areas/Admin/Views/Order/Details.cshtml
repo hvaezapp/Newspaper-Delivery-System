@@ -1,0 +1,159 @@
+﻿@model NDS.Models.ViewModels.OrderDtViewModel
+
+@using NDS.Utility
+
+
+
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-@TempData["type"]">
+        <span class="close" data-dismiss="alert">&times;</span>
+
+        @TempData["message"]
+
+    </div>
+}
+
+
+<h3>
+    Order Details
+</h3>
+
+<div class="row center-block box box-success" style="box-shadow:2px 2px 7px 3px gray;">
+
+    <div class="panel panel-primary col-md-8 col-md-offset-2" style="margin-top:25px; margin-bottom:25px;">
+
+
+        <div class="panel-body">
+            <div>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="glyphicon glyphicon-print"></i>
+                    Print Factor
+                </button>
+            </div>
+        </div>
+
+        <hr style="height:1px; background-color:gray;" />
+
+        @if (Model.order != null)
+        {
+            <div>
+                <h4>Order Info</h4>
+
+                <div>
+                    <label>Order Code</label>
+                    <p>@Model.order.Code</p>
+                </div>
+
+                <div>
+                    <label>Customer</label>
+                    <p>@Model.order.Tbl_Customer.FirstName @Model.order.Tbl_Customer.LastName</p>
+                </div>
+
+                <div>
+                    <label>Total Price </label>
+                    <p>@Model.order.TotalPrice.ToPrice()</p>
+                </div>
+
+
+                <div>
+                    <label>IsComplete</label>
+                    <p>
+                        @if (Model.order.IsComplete)
+                        {
+                            <text>Completed</text>
+
+                        }
+                        else
+                        {
+                            <text>Not Completed</text>
+                        }
+                    </p>
+                </div>
+
+
+
+                <div>
+
+                    <label>CompleteDateTime</label>
+                    <p>
+                        @if (Model.order.IsComplete)
+                        {
+                            @Model.order.CompleteDateTime
+
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+
+                    </p>
+                </div>
+
+
+
+                <div>
+                    <label>CreateDate</label>
+                    <p>@Model.order.CreateDate</p>
+                </div>
+
+            </div>
+
+
+
+            <hr style="height:1px; background-color:gray;" />
+        }
+
+
+
+
+        @if (Model.orderDetails.Any())
+        {
+
+            <h4>Order Details Info</h4>
+
+            <table class="table table-responsive text-center">
+
+                <thead>
+                    <tr style="font-size:15px; font-weight:600;">
+
+                        <td>Product</td>
+                        <td>Quantity</td>
+                        <td>CreateDate</td>
+
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    @foreach (var item in Model.orderDetails)
+                    {
+                        <tr>
+
+                            <td>@item.Tbl_Product.Title</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.CreateDate</td>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+
+
+            </table>
+
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <p>
+                    Empty
+                </p>
+            </div>
+        }
+    </div>
+</div>
+

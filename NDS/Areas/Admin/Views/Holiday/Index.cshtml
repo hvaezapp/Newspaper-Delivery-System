@@ -1,0 +1,66 @@
+﻿@model IEnumerable<NDS.Models.ViewModels.HolidayViewModel>
+
+@using NDS.Utility
+
+
+
+
+<h3>
+    Holidays
+</h3>
+<div class="row center-block box box-success" style="box-shadow:2px 2px 7px 3px gray;">
+
+    <div class="panel panel-primary col-md-10 col-md-offset-1" style="margin-top:25px; margin-bottom:25px;">
+
+
+        Current Date : @DateTime.Now.Date.ToShortDateString()
+
+        @if (Model.Any())
+        {
+            <table class="table table-responsive text-center">
+
+                <thead>
+                    <tr style="font-size:15px; font-weight:600;">
+                        <td>@Html.DisplayNameFor(model => model.date)</td>
+                        <td>@Html.DisplayNameFor(model => model.localName)</td>
+                        <td>@Html.DisplayNameFor(model => model.name)</td>
+                        <td>@Html.DisplayNameFor(model => model.countryCode)</td>
+                       
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.date</td>
+                            <td>@item.localName</td>
+                            <td>@item.localName</td>
+                            <td>@item.countryCode</td>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+
+
+            </table>
+
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <p>
+                    Empty
+                </p>
+            </div>
+        }
+    </div>
+</div>
+
+
+

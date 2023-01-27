@@ -1,0 +1,91 @@
+﻿@model NDS.Models.ViewModels.CreateStaffSessionViewModel
+
+@using NDS.Utility
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-@ViewBag.type">
+        <span class="close" data-dismiss="alert">&times;</span>
+        @ViewBag.message
+    </div>
+
+
+}
+
+<div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
+
+
+    <div class="col-md-10 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">
+
+        <form asp-controller="StaffSession" asp-action="Create" method="post" >
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+            <div class="form-group">
+                <label asp-for="staffSession.FkStaffId" class="control-label"></label>
+                <select asp-for="staffSession.FkStaffId" asp-items="@(new SelectList(Model.staffs,"Id","FullName"))" class="form-control circleInput">
+
+                    <option value="" class="text-bold">Select FullName</option>
+
+                </select>
+
+                <span asp-validation-for="staffSession.FkStaffId" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label asp-for="staffSession.SessionDateTime" class="control-label"></label>
+                <input  asp-for="staffSession.SessionDateTime" class="form-control" value="@DateTime.Now.Date" placeholder="Enter SessionDateTime " />
+                <span asp-validation-for="staffSession.SessionDateTime" class="text-danger"></span>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label asp-for="staffSession.SessionReadyStatus" class="control-label"></label>
+
+                <select asp-for="staffSession.SessionReadyStatus" class="form-control circleInput">
+
+
+                    <optgroup label="Select State"></optgroup>
+                    <option value="@SessionReadyStatus.Present.ToInt()">Present</option>
+                    <option value="@SessionReadyStatus.Absent.ToInt()">Absent</option>
+
+
+                </select>
+
+                <span asp-validation-for="staffSession.SessionReadyStatus" class="text-danger"></span>
+
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Back</a>
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+@section PanelScripts{
+
+  
+
+}

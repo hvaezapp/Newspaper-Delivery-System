@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<City>
+
+
+@{
+    Layout = null;
+
+}
+
+
+@if (Model.Any())
+{
+<div class="form-group">
+    <label for="@TempData["name"]" class="control-label">City</label>
+    <select name="@TempData["name"]" id="@TempData["id"]" asp-items="@(new SelectList(Model,"Id","Title"))" class="form-control circleInput">
+
+  
+
+        <optgroup label="Select City"></optgroup>
+
+
+    </select>
+    <span asp-validation-for="@TempData["id"]" class="text-danger"></span>
+</div>
+
+
+}

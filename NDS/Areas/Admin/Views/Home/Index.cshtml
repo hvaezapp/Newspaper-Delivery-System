@@ -1,0 +1,215 @@
+﻿
+@model NDS.Models.ViewModels.ReportViewModel
+
+<div style="margin-top:20px;">
+
+    <div class="col-lg-3 col-xs-3">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>@Model.supplierCount</h3>
+
+                <p>All Suppliers</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-3">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>@Model.productCount</h3>
+
+                <p>All Products</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-3">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+
+                <h3>@Model.customerCount</h3>
+
+                <p>All Customers</p>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="col-lg-3 col-xs-3">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>@Model.OrderCount</h3>
+
+                <p>All Orders</p>
+
+            </div>
+            <div class="icon">
+                <i class="ion ion-pin"></i>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Chart -->
+
+
+    <div class="row box box-body table-responsive no-padding">
+
+
+        <div class="col-md-12 ">
+
+      
+
+            <canvas id="myChart"></canvas>
+
+        </div>
+
+
+        <br />
+        <br />
+
+        <hr />
+
+
+        <div class="col-md-12 ">
+
+            <canvas id="myChartCity"></canvas>
+
+        </div>
+
+
+
+        <br />
+        <br />
+
+        <hr />
+
+
+        <div class="col-md-12 ">
+
+          
+
+            <canvas id="myChartPublishPlan"></canvas>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+@section PanelScripts{
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <script>
+
+
+        var lables = '@ViewBag.lables'.split(',');
+        var data = '@ViewBag.data'.split(',');
+
+        var myChart = new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: lables,
+                datasets: [{
+                    borderColor: "red",
+                    data: data
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Orders in Last Month "
+                }
+
+
+            }
+        });
+
+
+        //.........
+
+
+         var lables = '@ViewBag.citylables'.split(',');
+         var data = '@ViewBag.citydata'.split(',');
+
+         var barColors = ["red", "green","blue","orange","brown"];
+
+        new Chart("myChartCity", {
+              type: "bar",
+              data: {
+                  labels: lables,
+                datasets: [{
+                  backgroundColor: barColors,
+                    data: data
+                }]
+              },
+                options: {
+
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Cutomers in Areas"
+                    }
+                }
+        });
+
+
+        //............
+
+
+        var data = ['@ViewBag.deliveredCount','@ViewBag.deliveringCount','@ViewBag.notDeliverCount'];
+        var labels = ["Delivered", "Delivering", "NotDelivered"];
+
+        new Chart("myChartPublishPlan", {
+            type: "pie",
+            data: {
+                labels: labels,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: data
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "PublishPlan Statuses"
+                }
+            }
+        });
+
+    </script>
+
+}
+
+
+
+
+

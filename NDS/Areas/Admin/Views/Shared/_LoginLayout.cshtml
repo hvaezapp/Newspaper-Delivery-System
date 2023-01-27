@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+
+
+
+    <!-- BootStrap -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!--rtl BootStrap -->
+    <link href="~/css/bootstrap-rtl.css" rel="stylesheet" />
+    <link href="~/css/StyleSheet-index.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/adminpanelfiles/bowercomponents/font-awesome/css/font-awesome.min.css">
+
+    <environment include="Development">
+
+    </environment>
+    <environment exclude="Development">
+
+    </environment>
+
+    <style>
+        body {
+            background-image: linear-gradient(to right, rgba(255,255,255,0), #b5edf1);
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <environment include="Development">
+
+        <!-- jquery -->
+        <script src="~/js/jquery-3.2.1.min.js"></script>
+        <!-- javascript -->
+        <script src="~/js/bootstrap.min.js"></script>
+
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+
+        @* chart js *@
+        @*<script src="~/js/chart/jquery.flot.js"></script>
+            <script src="~/js/chart/jquery.flot.pie.js"></script>*@
+
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

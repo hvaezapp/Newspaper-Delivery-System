@@ -1,0 +1,90 @@
+﻿@*@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+
+@inject UserManager<NDS.Models.Domain.ApplicationUsers> _userManager
+@inject IHttpContextAccessor _hc
+
+
+@{ 
+    //بدست آوردن اطلاعات کاربری که لاگین کرده در ویو
+    var user = await _userManager.GetUserAsync(_hc.HttpContext.User);
+}*@
+
+<aside class="main-sidebar">
+
+
+    <section class="sidebar">
+
+   
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu" data-widget="tree">
+
+
+
+            <li class="active"><a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> <span>Main</span></a></li>
+
+            <li><a asp-controller="Customer" asp-action="Index"><i class="fa fa-money"></i> <span>Customer</span></a></li>
+
+            <li><a asp-controller="Supplier" asp-action="Index"><i class="fa fa-cab"></i> <span>Supplier</span></a></li>
+
+            <li><a asp-controller="Product" asp-action="Index"><i class="fa fa-product-hunt"></i> <span>Product</span></a></li>
+
+            <li><a asp-controller="Order" asp-action="Index"><i class="fa fa-dashcube"></i> <span>Order</span></a></li>
+
+            <li><a asp-controller="PublishPlan" asp-action="Index"><i class="fa fa-weibo"></i> <span>Publish Plan</span></a></li>
+
+
+            <li><a asp-controller="Payment" asp-action="Index"><i class="fa fa-dollar"></i> <span>Payment</span></a></li>
+
+            <li><a asp-controller="Trans" asp-action="Index"><i class="fa fa-recycle"></i> <span>Transaction</span></a></li>
+
+            <li><a asp-controller="Holiday" asp-action="Index"><i class="fa fa-dashcube"></i> <span>Holiday</span></a></li>
+
+
+            @*<li class="treeview">
+                <a href="#">
+                    <i class="fa fa-contao"></i> <span>Staff Management</span>
+                    <span class="pull-left-container">
+                        <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                </ul>
+            </li>*@
+
+
+            <li><a asp-controller="Staff" asp-action="Index"><i class="fa fa-bandcamp"></i> <span>Staffs</span></a></li>
+            <li><a asp-controller="StaffSession" asp-action="Index"><i class="fa fa-bandcamp"></i> <span>Staff Session Ready</span></a></li>
+
+
+
+            @*<li class="treeview">
+            <a href="#">
+                <i class="fa fa-location-arrow"></i> <span>Location Management</span>
+                <span class="pull-left-container">
+                    <i class="fa fa-angle-right pull-left"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+
+                <li><a asp-controller="Province" asp-action="Index">Province</a></li>
+                <li><a asp-controller="City" asp-action="Index">City</a></li>
+
+            </ul>
+        </li>*@
+
+
+            <li>  <a asp-controller="Province" asp-action="Index"> <i class="fa fa-location-arrow"></i> <span>Province</span> </a></li>
+            <li>  <a asp-controller="City" asp-action="Index"> <i class="fa fa-location-arrow"></i>  <span>City</span> </a></li>
+
+            <li><a asp-controller="AdminUser" asp-action="Index"><i class="fa fa-user"></i> <span>Account</span></a></li>
+
+
+            <li><a href="/Signout"><i class="fa fa-sign-out"></i> <span>Signout</span></a></li>
+
+
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

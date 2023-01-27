@@ -1,0 +1,57 @@
+﻿@model NDS.Models.ViewModels.AlreadySessionViewModel
+
+@using NDS.Utility
+
+@{
+    Layout = null;
+}
+
+<form asp-controller="StaffSession" asp-action="AlreadySession" method="post" >
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Attendance For "@Model.staff.FirstName @Model.staff.LastName"</h4>
+    </div>
+
+
+    <input type="hidden" asp-for="staffSession.FkStaffId" value="@Model.staff.Id" />
+
+    <div class="modal-body form-horizontal" style="padding:24px;">
+
+        <div class="form-group">
+            <label asp-for="staffSession.SessionDateTime" class="control-label"></label>
+            <input asp-for="staffSession.SessionDateTime" class="form-control" value="@DateTime.Now.Date" placeholder="Enter SessionDateTime " />
+            <span asp-validation-for="staffSession.SessionDateTime" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="form-group">
+            <label asp-for="staffSession.SessionReadyStatus" class="control-label"></label>
+
+            <select asp-for="staffSession.SessionReadyStatus" class="form-control circleInput">
+
+            
+
+                <option value="@SessionReadyStatus.Present.ToInt()" >Present</option>
+                <option value="@SessionReadyStatus.Absent.ToInt()">Absent</option>
+               
+
+            </select>
+
+            <span asp-validation-for="staffSession.SessionReadyStatus" class="text-danger"></span>
+
+        </div>
+
+
+
+    </div>
+
+    <div class="modal-footer" style="text-align:left;">
+        <button class="btn btn-default" type="button" data-dismiss="modal">Back</button>
+        <button class="btn btn-primary" type="submit">
+            Register
+        </button>
+    </div>
+
+</form>

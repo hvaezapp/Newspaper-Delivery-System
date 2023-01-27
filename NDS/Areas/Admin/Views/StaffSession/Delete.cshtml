@@ -1,0 +1,28 @@
+﻿@model StaffSessionReady
+
+@{ 
+    Layout = null;
+}
+
+<form asp-controller="StaffSession" asp-action="Delete">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Delete Staff Session</h4>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="modal-body form-horizontal">
+        Are You Sure For Delete ?
+    </div>
+
+
+    <div class="modal-footer" style="text-align:left;">
+        <button class="btn btn-default" type="button" data-dismiss="modal">Back</button>
+        <button class="btn btn-danger" type="submit">
+            Delete
+        </button>
+    </div>
+
+</form>

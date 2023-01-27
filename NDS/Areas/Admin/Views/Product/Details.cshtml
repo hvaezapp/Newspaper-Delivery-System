@@ -1,0 +1,148 @@
+﻿@model Product
+
+@using NDS.Utility
+
+
+@{
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Product Details For "@Model.Title"</h4>
+</div>
+
+
+<div class="modal-body form-horizontal" style="padding:24px;">
+
+    <div class="form-group">
+
+        <label asp-for="Price" class="control-label"></label>
+
+        <p>
+            @Model.Price.ToPrice()
+        </p>
+
+    </div>
+
+    <hr />
+
+
+    <div class="form-group">
+
+        <label asp-for="Description" class="control-label"></label>
+
+        <p>
+            @Model.Description
+        </p>
+
+    </div>
+
+    <hr />
+
+
+    <div class="form-group">
+
+        <label asp-for="Quantity" class="control-label"></label>
+
+        <p>
+            @Model.Quantity
+        </p>
+
+    </div>
+
+    <hr />
+
+
+
+    <div class="form-group">
+
+        <label asp-for="FkSupplierId" class="control-label"></label>
+
+        <p>
+            @Model.Tbl_Supplier.Title
+        </p>
+
+    </div>
+
+    <hr />
+
+
+    <div class="form-group">
+
+        <label asp-for="ProductType" class="control-label"></label>
+
+
+
+        @if (Model.ProductType == ProductType.NewsPaper.ToInt())
+        {
+
+            <p>
+                NewsPaper
+            </p>
+        }
+        else if (Model.ProductType == ProductType.Magazine.ToInt())
+        {
+            <p>
+                Magazine
+            </p>
+        }
+
+    </div>
+
+    <hr />
+
+
+
+
+    <div class="form-group">
+
+        <label asp-for="CreateDate" class="control-label"></label>
+
+        <p>
+            @Model.CreateDate
+        </p>
+
+    </div>
+
+    <hr />
+
+
+    <div class="form-group">
+
+        <label asp-for="IsExist" class="control-label"></label>
+
+        @if (Model.IsExist)
+        {
+            <p>
+                Exist
+            </p>
+        }
+        else
+        {
+            <p>
+                NotExist
+            </p>
+        }
+
+    </div>
+
+    <hr />
+
+
+
+</div>
+
+
+<div class="modal-footer" style="text-align:left;">
+
+    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+
+
+</div>
+
+
+
+
+

@@ -1,0 +1,181 @@
+﻿@model NDS.Models.ViewModels.CustomerViewModel
+
+@using NDS.Utility
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-@ViewBag.type">
+        <span class="close" data-dismiss="alert">&times;</span>
+        @ViewBag.message
+    </div>
+
+
+}
+
+
+
+<div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
+
+
+    <div class="col-md-10 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">
+
+        <form asp-controller="Customer" asp-action="Create" method="post" enctype="multipart/form-data">
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="customer.FirstName" class="control-label"></label>
+                <input asp-for="customer.FirstName" class="form-control" placeholder="Enter FirstName  " />
+                <span asp-validation-for="customer.FirstName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="customer.LastName" class="control-label"></label>
+                <input asp-for="customer.LastName" class="form-control" placeholder="Enter LasName  " />
+                <span asp-validation-for="customer.LastName" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="customer.Mobile" class="control-label"></label>
+                <input asp-for="customer.Mobile" class="form-control" placeholder="Enter Mobile  " />
+                <span asp-validation-for="customer.Mobile" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="customer.DOB" class="control-label"></label>
+                <input asp-for="customer.DOB" class="form-control" placeholder="Enter BirthDate  " />
+                <span asp-validation-for="customer.DOB" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="customer.Gender" class="control-label"></label>
+
+                <select asp-for="customer.Gender" class="form-control circleInput">
+
+                    <option value="" class="text-bold">Select Gender</option>
+                    <option value="@Gender.Male.ToInt()">Male</option>
+                    <option value="@Gender.FeMale.ToInt()">Female</option>
+                    <option value="@Gender.Other.ToInt()">Other</option>
+
+                </select>
+
+                <span asp-validation-for="customer.Gender" class="text-danger"></span>
+
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <label asp-for="customer.Address" class="control-label"></label>
+                <input asp-for="customer.Address" class="form-control" placeholder="Enter Address  " />
+                <span asp-validation-for="customer.Address" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="customer.FkProvinceId" class="control-label"></label>
+                <select asp-for="customer.FkProvinceId" onchange="ProvinceChanged(this)" asp-items="@(new SelectList(Model.provinces,"Id","Title"))" class="form-control circleInput">
+
+                  
+
+                    <optgroup label="Select Province"></optgroup>
+
+                </select>
+
+                <span asp-validation-for="customer.FkProvinceId" class="text-danger"></span>
+            </div>
+
+
+
+
+
+            @if (Model.cities.Any())
+            {
+                <div class="form-group">
+
+                    <label asp-for="customer.FkCityId" class="control-label"></label>
+
+                    <select asp-for="customer.FkCityId" asp-items="@(new SelectList(Model.cities,"Id","Title"))" class="form-control circleInput">
+
+                        <optgroup label="Select City"></optgroup>
+
+                    </select>
+
+                    <span asp-validation-for="customer.FkCityId" class="text-danger"></span>
+                </div>
+
+            }
+            else
+            {
+
+                <div class="form-group" id="cities">
+
+                </div>
+            }
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-danger">Back</a>
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+@section PanelScripts{
+
+    <script>
+
+        function ProvinceChanged(el) {
+
+            if ($(el).val() == "")
+                return;
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/City/GetCityByProvince',
+                data: { provinceId: $(el).val(), name: 'customer'},
+                success: function (result) {
+
+                    // show dialog box
+                    if (result != null) {
+
+                        $('#cities').html(result);
+                    }
+
+                },
+                error: function (err) {
+
+                    Swal.fire(
+                        'Error',
+                        "Error Happen " + err.message,
+                        'error'
+                    );
+                }
+            })
+        }
+
+    </script>
+
+}
