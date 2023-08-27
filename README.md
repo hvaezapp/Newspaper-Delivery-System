@@ -1,11 +1,3 @@
 <h4  style="font-family:Tahoma">
-  سیستم مدیریت پخش و تحویل روزنامه
-<br>
- سمت سرور : Asp.net core 5 
-<br>
-سمت فرانت : html css js bootstrap
-<br>
-معماری: Mvc
-<br>
- دیتابیس :   sql server
+ Newspaper Delivery System Designed By Asp.net Core And Work With Repository Pattern And UnitOfWork
 </h1>
